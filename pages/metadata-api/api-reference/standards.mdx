@@ -2,13 +2,7 @@
 
 Get all the Enso supported protocols to use in the bundle endpoint
 
-```bash
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/standards' \
-  -H 'accept: */*'
-```
-
-Response:
+#### Response:
 
 ```json
 [
@@ -110,6 +104,16 @@ Response:
       }
     ]
   },
-  ....+many more
+  ....
 ]
 ```
+
+Example
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/standards' \
+  -H 'accept: */*'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/StandardsController_standards)

@@ -4,13 +4,7 @@ Get all the Enso supported tokens.
 
 The result will give a sanitized list of tokens that are supported by Enso, you can also get the full list of tokens by calling the `/v1/tokens/unsanitized` endpoint.
 
-```bash
-curl -X 'GET' \
-  'https://api.enso.finance/api/v1/tokens' \
-  -H 'accept: */*'
-```
-
-Response:
+#### Response:
 
 ```json
 [
@@ -62,3 +56,13 @@ Response:
   .....
 ]
 ```
+
+#### Example:
+
+```bash
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/tokens' \
+  -H 'accept: */*'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/TokensController_findAll)
