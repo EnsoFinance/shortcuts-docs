@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # Enter a single position from 1 token
 
@@ -14,9 +14,10 @@ In this example, we have a smart wallet (e.g. Gnosis Safe, Enso Smart Wallet) th
 
 ### Set Smart-wallet address
 
+If you know your address or you are using another smart wallet such as Safe, you can skip to the next step.
+
 You will need to set the smart wallet address in the `fromAddress` field.
 If you are using an Enso Smart Wallet, and don't remember the address you can fetch using the metadata API.
-If you know your address or you are using another smart wallet such as Safe, you can skip to the next step.
 
 Fetch Enso Smart Wallet address from an EoA:
 
@@ -40,13 +41,12 @@ It returns the following:
 ### Execute: Fetch the actions
 
 We are using the [Route endpoint](../../router-api/api-reference/overview) as it compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase yvWETH on a secondary exchange than directly depositing it depending upon the exchange rate of that token on the secondary market.
-Note that the we set `toEoA` to _false_, as we are using a smart wallet.
 
 ```bash copy
 curl -X GET \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
-  "https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&priceImpact=false&toEoa=false&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84"
+  "https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&spender=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&receiver=0xD6A4217CF6A3587B4E33e9a59C52BF57469e713a&priceImpact=false&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xe0d5f9da3613c047003b77caa31270abe3eda6b0"
 ```
 
 The `data` value contains the bundle calldata to be submitted to the user.
