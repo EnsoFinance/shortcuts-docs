@@ -1,4 +1,5 @@
 {
   "overview": "Overview",
-  "route": "GET /v1/shortcuts/route"
+  "route": "GET /v1/shortcuts/route",
+  "quote": "GET /v1/shortcuts/quote"
 }

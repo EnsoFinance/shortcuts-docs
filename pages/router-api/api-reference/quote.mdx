@@ -27,14 +27,9 @@ It returns an object with the following parameters:
 
 ### Examples
 
-#### Simple ETH to stETH
+#### Quote ETH to stETH
 
-Spend Ether from the EOA and get stETH in return.
-
-Specify a tokenIn (ETH), tokenOut (stETH) and either a sellAmount to get a route of 1 ETH for WETH.
-The route endpoint will calculate the best route for you, choosing between all the avilable AMM's and protocols (E.g. depositing directly to Lido).
-
-If depositing directly to LIDO is the best route the tx object will contain the data to call the deposit function on the LIDO contract, otherwise it will contain the data to call the best AMM.
+Get a quote for spending 1 ETH for stEth
 
 #### Request:
 
