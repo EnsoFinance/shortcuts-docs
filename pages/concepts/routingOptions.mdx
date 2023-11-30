@@ -1,0 +1,24 @@
+# Routing Strategy Options
+Inside of the [route](https://api.enso.finance/api#/shortcuts/RouterController_routeShortcutTransaction) endpoint, there are three options for `routingStrategy`: `ensowallet`, `router` and `delegate`. Each of these options are explained below, and have their own particular usecase.
+
+For approving each type of routing strategy option, you can pass inside of the [approval endpoint](https://api.enso.finance/api#/wallet/WalletController_createApproveTransaction) with the desired routing option.
+
+## Router
+`router`: is a single contract, which can be seen as the universal router for all interactions that are [tokenized](./tokenized-nontokenized/tokenized.mdx). 
+
+Address: [0x80EbA3855878739F4710233A8a19d89Bdd2ffB8E](https://blockscan.com/address/0x80EbA3855878739F4710233A8a19d89Bdd2ffB8E)
+
+Recommended usecase:
+    1. EOAs 
+
+## Delegate
+`delegate`: returns calldata in the form of delegateCalls, which allows [tokenized](./tokenized-nontokenized/tokenized.mdx) and [non-tokenized](./tokenized-nontokenized/nontokenized.mdx).  Enabling all state of the smart account to remaiin in the smart account, and not in the router.
+
+Recommended usecase:
+    1. Smart Account 
+
+## Enso Wallet
+`ensowallet`: returns calldata for deploying a Enso smart account, and executing all the logic inside of the smart account in the same transaction.  Possible for [tokenized](./tokenized-nontokenized/tokenized.mdx) and [non-tokenized](./tokenized-nontokenized/nontokenized.mdx).
+
+Recommended usecase:
+    1. New smart account if you aren't already using another service
