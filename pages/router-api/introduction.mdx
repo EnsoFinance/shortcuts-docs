@@ -18,7 +18,7 @@ This allows for maximized capital efficiency and yield optimization, taking into
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&receiver=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&spender=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x06325440d014e39736583c165c2963ba99faf14e' \
+  'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&receiver=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&spender=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0x06325440d014e39736583c165c2963ba99faf14e&routingStrategy=router' \
   -H 'accept: application/json'
 ```
 
@@ -54,3 +54,10 @@ Under the hood, Enso will take care of the following steps:
 1. Swap Ether for one of the triCrypto underlying, in this case, USDC
 2. Deposit USDC into the [triCrypto](https://etherscan.io/address/0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7) Curve pool, receiving [triCrypto LP tokens](https://etherscan.io/address/0x6c3f90f043a72fa612cbac8115ee7e52bde6e490)
 3. Stake the received LP token into the [Curve Gauge](https://etherscan.io/address/0xbfcf63294ad7105dea65aa58f8ae5be2d9d0952a)
+
+#### Routing Options
+There are 3 options for routing strategies depending upon your usecase of EOA, Smart Account, or new Smart Account.
+
+- `router` - single contract, which can be seen as the universal router
+- `delegate` - returns calldata in the form of delegateCalls for smart accounts
+- `ensowallet` - returns calldata for deploying a Enso smart account, and executing all the logic inside of the smart account in the same transaction
