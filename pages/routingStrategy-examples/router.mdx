@@ -1,0 +1,44 @@
+import { Callout } from "nextra/components";
+
+# Enter a single position from 1 token
+
+In this example, we will have a user or smart contract that has [1 WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) in their Ethereum mainnet wallet, and wants to deposit 1 WETH into [Beefy Aura wstETH-ETH](https://etherscan.io/address/0xe0d5f9da3613c047003b77caa31270abe3eda6b0)
+
+<Callout type="info" emoji="💡">
+  Beefy Aura wstETH-ETH token is multihopping over 4 DeFi protocols
+</Callout>
+
+## Step 1: Approve
+
+The caller must approve the WETH first on the [router](../../concepts/routingOptions#router) so it can execute the bundle of transactions.
+
+### Approve: Approve Transaction
+
+Enso:
+
+```bash copy
+curl -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  "https://api.enso.finance/api/v1/wallet/approve?chainId=1&fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806&tokenAddress=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&amount=1000000000000000000000000000&routingStrategy=router"
+```
+
+Ethers:
+
+```javascript
+await ERC20(0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2).approve(address, 5 Ether) // take decimals of the token you're approving into account
+```
+
+## Step 2: Execute
+
+### Execute: Build actions
+
+We are using the [Route endpoint](../../router-api/api-reference/overview) as this it compares the best execution route for token amount out, and gas execution price. For example, it might be better to purchase stEth on a DEX than directly depositing it depending upon the exchange rate of that token on the secondary market.
+
+```bash copy
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806&receiver=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806&spender=0x57757E3D981446D585Af0D9Ae4d7DF6D64647806&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xe0d5f9da3613c047003b77caa31270abe3eda6b0&routingStrategy=router' \
+  -H 'accept: application/json'
+```
+
+The `data` value contains the bundle calldata to be submitted to the user.
