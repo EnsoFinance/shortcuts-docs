@@ -19,6 +19,7 @@ This simulation gives you a comprehensive quote, detailing expected gas costs, r
 | `tokenIn`                 | Ethereum address of the token to swap or enter into a position from                                                              | tokenIn=0x6b175474e8909...             |
 | `amountIn`                | Amount of tokenIn to swap in wei                                                                                                 | amountIn=100000000000                  |
 | `tokenOut`                | Ethereum address of the token to swap or enter into a position to                                                                | tokenOut= 0x182b723a587...             |
+| `routingStrategy`         | Routing strategy either `router`, `delegate` or `ensowallet`                                                                     | routingStrategy=router                 |
 | `toEOA`                   | (**Deprecated**) Flag that indicates if gained tokenOut should be sent to EOA, deprecated in favor of `receiver`                 | toEOA=true                             |
 | `priceImpact`             | Flag that indicates whether to calculate and return the price impact of the transaction                                          | priceImpact=true                       |
 | `chainId`                 | (Optional) The chainId of the network. Default value is 1 for Mainnet                                                            | chainId=1                              |
@@ -54,7 +55,7 @@ If depositing directly to LIDO is the best route the tx object will contain the 
 #### Request:
 
 ```url
-https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&receiver=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&spender=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84
+https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&receiver=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&spender=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&amountIn=1000000000000000000&slippage=300&tokenIn=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&tokenOut=0xae7ab96520de3a18e5e111b5eaab095312d7fe84&routingStrategy=router
 ```
 
 #### Response:
