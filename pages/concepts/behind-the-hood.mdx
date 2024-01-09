@@ -1,0 +1,9 @@
+# Behind the hood
+
+### Routing, price impact and amounts out
+
+In DeFi trading, it's common to encounter variable losses due to [price impact](https://support.uniswap.org/hc/en-us/articles/8671539602317-What-is-Price-Impact-). The Enso Router does the best effort to find the optimal route for your trade. If your position and its underlyings are supported, it will use the position directly. Otherwise, it looks for the best AMM to route the trade through.
+
+Our response also includes information about the price impact when available. If it's not available, Enso always simulates the transaction, providing you with the expected **amounts out** and the **trade path**. With this information, you as the integrator can check that the outcome matches your expectations and decide whether to go ahead with the trade.
+
+It's important for integrators to review this information. While we do our best to optimize each trade, the final responsibility to verify and confirm that the trade meets your expectations rest on you. This ensures you're always in control and making decisions that align with your specific needs and risk assessment.
