@@ -88,7 +88,7 @@ https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf2
 ```
 ### Behind the hood: Routing, price impact and amounts out
 
-In DeFi trading, it's common to encounter variable losses due to [price impact](https://support.uniswap.org/hc/en-us/articles/8671539602317-What-is-Price-Impact-. The Enso Router works hard to find the best route for your trade. If your position and its underlyings are supported, it will use the position directly. Otherwise, it looks for the best AMM to route the trade through.
+In DeFi trading, it's common to encounter variable losses due to [price impact](https://support.uniswap.org/hc/en-us/articles/8671539602317-What-is-Price-Impact-). The Enso Router works hard to find the best route for your trade. If your position and its underlyings are supported, it will use the position directly. Otherwise, it looks for the best AMM to route the trade through.
 
 Our response also includes information about the price impact when available. If it's not available, Enso always simulates the transaction, providing you with the expected **amounts out** and the **trade path**. With this information, you as the integrator can check that the outcome matches your expectations and decide whether to go ahead with the trade.
 
