@@ -16,5 +16,11 @@
         "type": "page",
         "href": "https://drive.google.com/file/d/1Z_szzLwwLqx9v6liyslKsos75I17obDS/view?usp=sharing",
         "newWindow": true
+    },
+    "presentations": {
+        "title": "Presentations ↗",
+        "type": "page",
+        "href": "https://enso-friends.notion.site/Enso-Public-Appearances-d0306df234224bb1858299d57b308909",
+        "newWindow": true
     }
 }
