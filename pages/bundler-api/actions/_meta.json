@@ -1,7 +1,6 @@
 {
   "route": "Route",
   "deposit": "Deposit",
-  "apiswap": "API Swap",
   "harvest": "Harvest",
   "borrow": "Borrow",
   "repay": "Repay",

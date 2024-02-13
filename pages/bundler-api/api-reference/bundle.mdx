@@ -6,7 +6,7 @@
 
 | Query Param   | Description                                                                                         | Example                    |
 | ------------- | --------------------------------------------------------------------------------------------------- | -------------------------- |
-| `fromAddress` | Ethereum address of the wallet to send the transaction from (It could be an EoA, or a Smart Wallet) | tokenIn=0x6b175474e8909... |
+| `fromAddress` | Ethereum address of the wallet to send the transaction from (It could be an EoA, or a Smart Wallet) | fromAddress=0x6b175474e8909... |
 | `chainId`     | (Optional) The chainId of the network. Default value is 1 for Mainnet                               | chainId=1                  |
 
 #### Body:
@@ -23,7 +23,72 @@ An array of objects (specific actions) with the following structure:
 ]
 ```
 
-Args are action specific and you can find them in the [Actions](#actions) section.
+## Enso Bundler
+Enso Bundler offer developers a versatile approach to interacting with DeFi protocols through three primary tools: the Enso Router, the Arbitrary Contract Calls and the protocols Actions.
+
+#### Enso Router
+Designed to simplify the process of executing transactions across various DeFi protocols, the Enso Router abstracts complex protocol interactions into a user-friendly interface. This allows developers to efficiently route transactions, swap tokens, and manage liquidity across multiple platforms with minimal effort.
+**Example:**\
+```json copy
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+      "amountIn": "100000000000",
+      "slippage": "300"
+    }
+  }
+]
+  ```
+
+#### Contract Calls
+ For those seeking granular control over their DeFi interactions, The `call` action is a powerful tool to execute custom logic directly on the blockchain. This feature empowers developers to craft tailored transactions, interact with smart contracts beyond the predefined Enso Router pathways, and implement unique strategies that align with their specific objectives.
+ The usage is very similar to the route endpoint (which uses under the hood the same functionalities), and it's as simpler as Token A -> Token B where both can be base tokens or vaults, lps and so on.\
+**Example:**\
+After routing to a specific token, transfer the swapped amount to a specific address
+```json copy
+[
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+      "amountIn": "100000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "enso",
+    "action": "call",
+    "args": {
+      "address": "0xCc9EE9483f662091a1de4795249E24aC0aC2630f",
+      "method": "transfer",
+      "abi": "function transfer(address,uint256) external",
+      "args": [
+        "0x93621DCA56fE26Cdee86e4F6B18E116e9758Ff11",
+        {
+          "useOutputOfCallAt": 1
+        }
+      ]
+    }
+  }
+]
+  ```
+
+
+### Protocol-specific actions
+Pre-made, protocol-specific actions that can be combined into a single transaction. These are protocol interactions abstracted by Enso. They include deposit/withdraw actions on specific protocols, borrow actions, or swaps on specific AMMs.
+
+You can find the list of all available protocols here.
+
+### Args and utils:
+
+#### Args
+Arguments are action specific and you can find them in the [Actions](#actions) section.
 A simple example for the route actions can be:
 
 ```json
@@ -34,36 +99,68 @@ A simple example for the route actions can be:
 }
 ```
 
-## Examples
+#### Utils: use previous outputs
 
-Bundle multiple route actions in a single transaction.
-Route specific amounts of Ether into stEth and steCrv (a Curve LP token)
 
-Both transactions are bundled together in a single one.
+One of the most powerful features of the bundle endpoint is the possibility to use the output of a previous action as an input for the next one.
+Generally, the output of an action is an amount of tokens. But in the future we will support more complex outputs.
+
+```json
+{
+  "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", // ETH
+  "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84", // stETH
+  "amountIn": { useOutputOfCallAt: 0 }
+}
+```
+
+The following sectin will show a complete example of a bundle request, with multiple actions and the use of the output of a previous action as an input for the next one.
+
+
+#### Examples
+Route from ETH to stETH, deposit stETH on Aave, and transfer the aToken to a specific address. 
 
 ```bash copy
 curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation' \
   -d '[
-    {
-      "protocol": "enso",
-      "action": "route",
-      "args": {
-        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "tokenOut": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-        "amountIn": "1000000000"
-      }
-    },
-    {
-      "protocol": "enso",
-      "action": "route",
-      "args": {
-        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "tokenOut": "0x06325440d014e39736583c165c2963ba99faf14e",
-        "amountIn": "1000000000"
+  {
+    "protocol": "enso",
+    "action": "route",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+      "amountIn": "100000000000",
+      "slippage": "300"
+    }
+  },
+  {
+    "protocol": "aave-v3",
+    "action": "deposit",
+    "args": {
+      "primaryAddress": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+      "tokenIn": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+      "tokenOut": "0xCc9EE9483f662091a1de4795249E24aC0aC2630f",
+      "amountIn": {
+        "useOutputOfCallAt": 0
       }
     }
-  ]' \
+  },
+  {
+    "protocol": "enso",
+    "action": "call",
+    "args": {
+      "address": "0xCc9EE9483f662091a1de4795249E24aC0aC2630f",
+      "method": "transfer",
+      "abi": "function transfer(address,uint256) external",
+      "args": [
+        "0x93621DCA56fE26Cdee86e4F6B18E116e9758Ff11",
+        {
+          "useOutputOfCallAt": 1
+        }
+      ]
+    }
+  }
+]' \
   'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
 ```
