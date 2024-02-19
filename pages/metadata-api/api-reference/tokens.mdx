@@ -1,0 +1,74 @@
+# Tokens
+## GET /v1/tokens
+
+Get the Enso supported tokens.
+
+This endpoint includes defi tokens and base, swappable tokens.
+For more details, see the [position types](/concepts).
+
+#### Example:
+
+```bash copy
+curl -X 'GET' \
+  'https://shortcuts-backend-dynamic-dev.herokuapp.com/api/v1/tokens?chainId=1&page=1' \
+  -H 'accept: */*'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/TokensController_tokens)
+
+#### Optional Query Parameters:
+
+| Query Param         | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `chainId`           | The chainId of the positions to return        |
+| `address`           | Address of the token to search for            |
+| `protocolSlug`      | Protocol slug of the defi token, e.g. aave-v2  |
+| `type`              | Token type, base token or defi token           |
+| `underlyingTokens`  | Address of the underlying tokens to search for|
+| `page`              | Page, used for pagination                     |
+
+#### Response example:
+
+```json
+{
+  "meta": {
+    "total": 5850,
+    "lastPage": 6,
+    "currentPage": 1,
+    "perPage": 1000,
+    "prev": null,
+    "next": 2
+  },
+  "data": [
+    {
+      "chainId": 1,
+      "address": "0x3Ed3B47Dd13EC9a98b44e6204A523E766B225811",
+      "type": "defi",
+      "protocolSlug": "aave-v2",
+      "underlyingTokens": [
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      ]
+    },
+    {
+      "chainId": 1,
+      "address": "0x9ff58f4fFB29fA2266Ab25e75e2A8b3503311656",
+      "type": "defi",
+      "protocolSlug": "aave-v2",
+      "underlyingTokens": [
+        "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+      ]
+    },
+    {
+      "chainId": 1,
+      "address": "0x030bA81f1c18d280636F32af80b9AAd02Cf0854e",
+      "type": "defi",
+      "protocolSlug": "aave-v2",
+      "underlyingTokens": [
+        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+      ]
+    }. . .
+
+    }
+    ```
+   
+

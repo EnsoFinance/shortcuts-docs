@@ -1,10 +1,10 @@
 {
   "index": "Welcome",
   "introduction": "Introduction",
-  "routingStrategy-examples": "routingStrategy examples",
   "router-api": "Router API",
   "bundler-api": "Bundler API",
   "metadata-api": "Metadata API",
+  "routingStrategy-examples": "Routing Strategy Examples",
   "react-hooks": "React Hooks Library",
   "concepts": "Concepts",
   "resources": "Resources",

@@ -18,67 +18,11 @@ With the Metadata API, you get an easy-to-use, reliable tool that simplifies you
   Try it out:
 </Callout>
 
-👉 Run this curl request to see all the tokens and positions supported by ENSO:
+👉 Run this curl request to see all the tokens and tokens supported by ENSO:
 
 ```bash copy
 curl -X 'GET' \
-  'https://api.enso.finance/api/v1/positions' \
+  'https://api.enso.finance/api/v1/tokens' \
 ```
 
-👉 Try it on [swagger](https://api.enso.finance/api#/metadata/PositionsController_positions)
-
-Will return a response like this:
-
-```json
-{
-      "apy": 0.45023,
-      "apyBase": null,
-      "apyReward": null,
-      "chainId": 42161,
-      "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d:0x6a7661795c374c0bfc635934efaddff3a7ee23b6_0xbbf9d705b75f408cfcaee91da32966124d2c6f7d_0xc6eee8cb7643ec2f05f46d569e9ec8ef8b41b389",
-      "name": "Balancer DOLA/bbaUSD StablePool ",
-      "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-      "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
-      "subtitle": "DOLA/bbaUSD-BPT ",
-      "rewardTokens": [],
-      "token": {
-        "id": "42161:0xbbf9d705b75f408cfcaee91da32966124d2c6f7d",
-        "address": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-        "name": "Balancer DOLA/bbaUSD StablePool ",
-        "symbol": "DOLA/bbaUSD-BPT ",
-        "decimals": 18,
-        "chain": 42161,
-        "type": 1,
-        "project": "balancer-v2",
-        "protocol": "balancer-v2",
-        "poolAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-        "primaryAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8",
-        "underlyingTokens": [
-          "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
-          "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-          "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
-        ]
-      },
-      "tokenAddress": "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-      "tvl": 250286,
-      "underlyingTokens": [
-        "0x6A7661795C374c0bFC635934efAddFf3A7Ee23b6",
-        "0xbBF9d705b75F408CFCaEE91dA32966124d2c6F7D",
-        "0xc6EeE8cb7643eC2F05F46d569e9eC8EF8b41b389"
-      ],
-      "project": "balancer-v2",
-      "protocol": {
-        "name": "balancer-v2",
-        "slug": "balancer-v2",
-        "logo": "https://icons.llama.fi/balancer-v2.png",
-        "url": "https://balancer.finance/",
-        "description": "Balancer is a protocol for programmable liquidity.",
-        "twitter": "BalancerLabs",
-        "category": "Dexes",
-        "chainIds": [
-          42161
-        ]
-      }
-    },
-    ...
-```
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/TokensController_tokens)
