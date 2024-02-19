@@ -1,5 +1,5 @@
 {
-  "router": "routingStrategy=router (recommended)",
-  "ensowallet": "routingStrategy=ensowallet",
-  "delegate": "routingStrategy=delegate"
+  "router": "router (recommended)",
+  "ensowallet": "enso wallet",
+  "delegate": "delegate (other wallets)"
 }
