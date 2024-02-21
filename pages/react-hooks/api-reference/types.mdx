@@ -16,51 +16,6 @@ type Token = {
 }
 ```
 
-### Position
-Describes a set of information about a pool or a basetoken that can be executed/entered via a shortcut.
-
-```ts
-type Position = PoolPosition | BasePosition
-```
-
-#### PoolPosition
-Describes positions that are pools with underlying tokens.
-
-```ts
-type PoolPosition = {
-  apy?: number;
-  apyBase?: number;
-  apyReward?: number;
-  chainId: number;
-  id: string;
-  name: string;
-  poolAddress: string;
-  primaryAddress: string;
-  subtitle: string;
-  rewardPoolTokens: string[];
-  token?: Token;
-  tokenAddress: string;
-  tvl: number;
-  underlyingPoolTokens: string[];
-  project: string;
-};
-```
-
-#### BasePosition
-Describes base tokens that can be swapped to.
-
-```ts
-type BasePosition = {
-  chainId: number;
-  name: string;
-  symbol: string;
-  address: string;
-  decimals: number;
-  logoURI: string;
-}
-```
-
-
 #### Route
 Describes a route that was found via the `useExecutePosition` hook.
 
