@@ -1,6 +1,4 @@
 {
-  "use-positions": "UsePositions",
   "use-execute-position": "UseExecutePosition",
-  "use-crosschain-route": "UseCrossChainRoute",
   "types": "Types/Schema"
 }
