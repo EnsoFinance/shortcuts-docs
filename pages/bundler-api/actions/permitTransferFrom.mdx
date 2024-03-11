@@ -1,3 +1,33 @@
 # Permit TransferFrom
 
-Available in endpoint.  Docs coming soon...
+Approve and transfer a token that supports permit to a specific address.
+A permit signature needs to be generated offchain and passed to the API.
+
+Arguments:
+| name | Description | Example |
+| ------- | ---------------    | -------------------------- |
+| `token` | Address of the token to approve | token=0x6b175474e8909... |
+| `nonce` | The nonce to prevent signature replays | nonce=1 |
+| `deadline` | The deadline on the permit signature | deadline=1710150268|
+| `signature` | The permit signature|  |
+| `amount` | Raw amount to transfer | amount=100000000000 |
+
+## Example
+
+Body:
+
+```json
+[
+  {
+    "action": "transfer",
+    "args": {
+      "token": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+      "nonce": "1",
+      "deadline": "1710150268",
+      "signature": "0x..",
+      "amount": "1000000000000000000000000"
+    }
+  }
+]
+```
+

@@ -1,3 +1,48 @@
 # Approve
 
-Available in endpoint.  Docs coming soon...
+Approve an address to spend tokens
+
+Arguments:
+| name | Description | Example |
+| ------- | ---------------    | -------------------------- |
+| `token` | Address of the token to approve | token=0x6b175474e8909... |
+| `spender` | Address of the spender | spender=0x6b175474e8909... |
+| `amount` | Raw amount to approve | amount=100000000000 |
+
+## Example
+
+Body:
+
+```json
+[
+  {
+    "action": "approve",
+    "args": {
+      "token": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+      "spender": "0x80eba3855878739f4710233a8a19d89bdd2ffb8e",
+      "amount": "1000000000000000000000000"
+    }
+  }
+]
+```
+
+Curl:
+
+```bash copy
+curl -X 'POST' \
+  'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '[
+  {
+    "protocol": "enso",
+    "action": "approve",
+    "args":  {
+      "token": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+      "spender": "0x80eba3855878739f4710233a8a19d89bdd2ffb8e",
+      "amount": "1000000000000000000000000"
+    }
+  }
+]'
+```
+

@@ -1,13 +1,13 @@
 {
   "route": "Route",
   "deposit": "Deposit",
+  "approve": "Approve",
+  "transfer": "Transfer",
+  "transferFrom": "TransferFrom",
+  "permitTransferFrom": "Permit TransferFrom",
   "harvest": "Harvest",
   "borrow": "Borrow",
   "repay": "Repay",
   "redeem": "Redeem",
-  "swap": "Swap",
-  "transfer": "Transfer",
-  "withdraw": "Withdraw",
-  "approve": "Approve",
-  "permitTransferFrom": "Permit TransferFrom"
+  "withdraw": "Withdraw"
 }
