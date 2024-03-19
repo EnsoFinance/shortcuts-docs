@@ -7,6 +7,15 @@ Depositing is the action for taking funds from the callers wallet into a particu
 
 NOTE: Direct deposit actions doesn't have slippage protection. If you are interacting with a protocol that needs slippage protection use the [route endpoint](./route.md)
 
+| Argument | Description | Example |
+| -------- | ----------- | ------- |
+| `tokenIn` | Address of token to send. You can define many tokens in by [inToken1, inToken2] | tokenIn=0x3b175474e8909... |
+| `amountIn` | Raw amount to send. You can define many tokens out by [outToken1, outToken2] | amountIn=100000000000 |
+| `tokenOut` | Address of token to receive | tokenOut=0x6b175474e8909... |
+| `primaryAddress` | Address of smart contract to interact with e.g. Balancer Vault | primaryAddress=0x7b175474e8909.. |
+| `recipient` | Address of the receiver. Optional - if you want to send the tokens to a different address than the smart wallet | recipient=0x8b175474e8909... |
+
+
 ## Example
 
 With Enso you can simply use Deposit for all protocols resulting in quick, and easy integration with all the logic for each particular protocol deposit logic abstracted away.
@@ -26,25 +35,11 @@ You can use the deposit action inside of the [bundle endpoint](../api-reference/
 },
 ```
 
-```javascript
-tokenIn: 'Address of token to send' // You can define many tokens in by [inToken1, inToken2]
-amountIn: 'Raw amount to send' // You can define many tokens out by [outToken1, outToken2]
-  ? tokenOut
-  : 'Address of token to receive' // Optional - protocols that have isolated contracts per each deposit(for example Yearn), then you do not need to define tokenOut.  For protocols that have a shared contract for all of their vaults/deposits such as balancer and univ4 then you should define tokenOut
-primaryAddress: 'Address of smart contract to interact with' //  Address of smart contract to interact with e.g. Balancer Vault
-```
-
 ## Endpoints
 
-### GET
-
-Get all the protocols that have a deposit action
 
 ### POST [/api/v1/shortcuts/bundle](https://api.enso.finance/api#/shortcuts/BundleController_bundleShortcutTransaction)
 
-The bundle endpoint enables bundling of many actions into one transaction, and for the examples below we will simply do one action of deposit.
-
-Convert from [WETH](https://etherscan.io/address/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) to [yvUSDC](https://etherscan.io/address/0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56) assuming the user has USDC in their wallet. More more efficiency it is advised to use the [route endpoint](./route.md) for these types of actions
 
 ```bash copy
 curl -X POST \
@@ -58,7 +53,6 @@ curl -X POST \
       "tokenOut": "0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56",
       "amountIn": "1000000000000000000",
       "primaryAddress": "0xba12222222228d8ba445958a75a0704d566bf2c8",
-      "tokenInAmountToTransfer": "1000000000000000000"
     },
     "protocol": "balancer-v2"
   }]' \

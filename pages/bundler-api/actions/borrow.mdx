@@ -1,3 +1,126 @@
 # Borrow
 
-Available in endpoint.  Docs coming soon...
+Borrow is the action for borrowing a specific asserts, after depositing into a lending protocol.
+
+Arguments:
+| name | Description | Example |
+| ------- | ---------------    | -------------------------- |
+| `collateral` | Address of the token to use as a collateral | collateral=0x3b175474e8909... |
+| `tokenOut` | Address of the token to borrow | tokenOut=0x6b175474e8909... |
+| `amountOut` | Raw amount to borrow | amountOut=100000000000 |
+| `primaryAddress` | Address of the lending pool | primaryAddress=0x7b175474e8909.. |
+
+## Examples
+
+You can use the deposit action inside of the [bundle endpoint](../api-reference/bundle).
+
+```
+{
+    protocol: "aave-v3",
+    args: {
+        collateral: weth,
+        tokenOut: usdc,
+        amountIn: wethAmount
+        primaryAddress: aaveLendingPool
+    },
+    action: "borrow",
+},
+```
+
+### Deposit ETH -> borrow USDC
+In this example we are depositing 1 ETH into the Aave lending pool and borrowing 1000 USDC.
+
+Note: The user smart wallet will hold aWeth and the borrowed USDC, if you want to send the tokens to another address you can append a transfer action.
+Since ETH is the token in, we won't need to approve the spending.
+
+
+```bash copy
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
+  {
+    "protocol": "aave-v3",
+    "action": "deposit",
+    "args": {
+      "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "tokenOut": "0x4d5F47FA6A74757f35C14fD3a6Ef8E3C9BC514E8",
+      "amountIn": "1000000000000000000",
+      "primaryAddress": "0xD322A49006FC828F9B5B37Ab215F99B4E5caB19C"
+    }
+  },
+  {
+    "protocol": "aave-v3",
+    "action": "borrow",
+    "args": {
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "amountOut": "1000000000",
+      "primaryAddress": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+    }
+  }
+]' \
+"https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
+```
+
+[Here](https://www.tdly.co/shared/simulation/ca163c5f-c154-40af-8e66-508710e3b518) you can inspect a simulation of the above transaction.
+
+For convinience, you can also use the [route](./route.mdx) action instead of deposit, it's useful when you want to swap the token in for the token out and deposit it into the lending pool.
+
+```
+ {
+      "protocol": "enso",
+      "action": "route",
+      "args": {
+        "tokenIn": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "tokenOut": "0x4d5F47FA6A74757f35C14fD3a6Ef8E3C9BC514E8",
+        "amountIn": "1000000000000000000"
+        "slippage": 300
+      }
+      ...borrow
+```
+
+### Deposit WETH -> borrow USDC
+
+In this example we deposit WETH from the EOA into the Aave lending pool and borrow 1000 USDC.
+First let's get the address of the user smart wallet to approve the spending of the WETH.
+
+```bash copy
+curl -X GET \
+  -H "Accept: application/json" \
+  "https://api.enso.finance/api/v1/wallet?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
+```
+
+Using ethers or your favourite web3 library, you can approve the WETH spending. 
+You can also get the calldata using the approve [action](./approve.mdx).
+
+After the spending is approved you can get the bundled deposit and borrow:
+
+```bash copy
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
+  {
+    "protocol": "aave-v3",
+    "action": "deposit",
+    "args": {
+      "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0x4d5F47FA6A74757f35C14fD3a6Ef8E3C9BC514E8",
+      "amountIn": "1000000000000000000",
+      "primaryAddress": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+    }
+  },
+  {
+    "protocol": "aave-v3",
+    "action": "borrow",
+    "args": {
+      "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "tokenOut": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "amountOut": "1000000000",
+      "primaryAddress": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+    }
+  }
+]' \
+"https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
+```
