@@ -51,7 +51,7 @@ The tx objects gives you the transaction to use in ethers. The other fields are 
 Spend Ether from the EOA and get stETH in return.
 
 Specify a tokenIn (ETH), tokenOut (stETH) and either a sellAmount to get a route of 1 ETH for WETH.
-The route endpoint will calculate the best route for you, choosing between all the avilable AMM's and protocols (E.g. depositing directly to Lido).
+The route endpoint will calculate the best route for you, choosing between all the available AMM's and protocols (E.g. depositing directly to Lido).
 
 If depositing directly to LIDO is the best route the tx object will contain the data to call the deposit function on the LIDO contract, otherwise it will contain the data to call the best AMM.
 
