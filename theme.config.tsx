@@ -20,7 +20,7 @@ const config: DocsThemeConfig = {
     link: 'https://enso.finance',
   },
   chat: {
-    link: 'https://t.me/enso_api',
+    link: 'https://t.me/enso_intent_engine',
   },
   docsRepositoryBase: 'https://github.com/EnsoFinance/shortcuts-docs',
   footer: {
