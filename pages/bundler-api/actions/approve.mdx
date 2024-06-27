@@ -17,6 +17,7 @@ Body:
 [
   {
     "action": "approve",
+    "protocol": "enso",
     "args": {
       "token": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
       "spender": "0x80eba3855878739f4710233a8a19d89bdd2ffb8e",
@@ -29,20 +30,19 @@ Body:
 Curl:
 
 ```bash copy
-curl -X 'POST' \
-  'https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '[
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation" \
+  --data '[
   {
-    "protocol": "enso",
     "action": "approve",
-    "args":  {
-      "token": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
-      "spender": "0x80eba3855878739f4710233a8a19d89bdd2ffb8e",
+    "args": {
+      "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "spender": "0xe592427a0aece92de3edee1f18e0157c05861564",
       "amount": "1000000000000000000000000"
-    }
-  }
-]'
+    },
+    "protocol": "enso"
+  }]' \
+  "https://api.enso.finance/api/v1/shortcuts/bundle?chainId=1&fromAddress=0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
 ```
 
