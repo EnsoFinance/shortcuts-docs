@@ -37,7 +37,7 @@ The tx objects gives you the transaction to use in ethers. The other fields are 
 | Field         | Description                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `route`       | An Array of objects containing: <br/> `tokenIn` <br/> `positionInId` <br/> `tokenOut` <br/> `positionOutId` <br/> `protocol` <br/> `action` |
-| `gas`         | Estimated gas used by the transaction                                                                                                       |
+| `gas`         | Estimated gas used by the transaction. Being an estimation, is usually good practice to increase it by <strong>50%</strong>                                                                                                    |
 | `amountOut`   | Estimated amount out received                                                                                                               |
 | `priceImpact` | Price impact in basis points, null if USD price not found                                                                                   |
 | `createdAt`   | Block number the transaction was created on                                                                                                 |
@@ -63,7 +63,7 @@ https://api.enso.finance/api/v1/shortcuts/route?chainId=1&fromAddress=0xd8da6bf2
 
 #### Response:
 
-(Response route may differ)
+(Response route may differ, good practice is to increase the estimated gas by approx. 50%)
 
 ```json
 {
