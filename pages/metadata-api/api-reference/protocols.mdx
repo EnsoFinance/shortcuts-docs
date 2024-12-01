@@ -1,0 +1,56 @@
+## GET /v1/protocols
+
+Get all the Enso supported protocols and their metadata
+
+#### Response:
+
+```json
+[{
+    "slug": "uniswap-v3",
+    "url": "https://uniswap.org/",
+    "logosUri": [
+      "https://icons.llama.fi/uniswap-v3.png"
+    ],
+    "description": "",
+    "name": "Uniswap v3",
+    "chains": [
+      {
+        "id": 1,
+        "name": "mainnet"
+      },
+      {
+        "id": 137,
+        "name": "polygon"
+      },
+      {
+        "id": 42161,
+        "name": "arbitrum"
+      },
+      {
+        "id": 10,
+        "name": "optimism"
+      },
+      {
+        "id": 56,
+        "name": "binance"
+      },
+      {
+        "id": 8453,
+        "name": "base"
+      }
+    ]
+  },
+  .......
+]
+```
+
+Example
+
+```bash copy
+curl -X 'GET' \
+  'https://api.enso.finance/api/v1/protocols' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer 1e02632d-6feb-4a75-a157-documentation'
+```
+
+👉 Try it on [swagger](https://api.enso.finance/api#/metadata/ProtocolsController_findAll)
